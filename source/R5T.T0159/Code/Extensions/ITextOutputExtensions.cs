@@ -27,5 +27,10 @@ namespace System
                 2000,
                 args);
         }
+
+        public static void WriteSectionSeparator(this ITextOutput textOutput)
+        {
+            Instances.TextOutputOperator.WriteSectionSeparator(textOutput);
+        }
     }
 }
