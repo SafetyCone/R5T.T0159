@@ -2,6 +2,7 @@ using System;
 
 using Microsoft.Extensions.Logging;
 
+using R5T.T0142;
 using R5T.T0158;
 
 
@@ -17,6 +18,7 @@ namespace R5T.T0159
     /// Instead of passing around two instances from function to function, or needing to create two contexts in which to run an action, bundle instances of each together.
     /// The bundle is also useful, since many messages will be <strong>both</strong> a log message and a human output message.
     /// </remarks>
+    [UtilityTypeMarker]
     public interface ITextOutput
     {
         public IHumanOutput HumanOutput { get; }

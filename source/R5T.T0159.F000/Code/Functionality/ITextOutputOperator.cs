@@ -12,6 +12,44 @@ namespace R5T.T0159.F000
         private static Internal.ITextOutputOperator Internal => F000.Internal.TextOutputOperator.Instance;
 
 
+        public ITextOutput Get_New_Null()
+        {
+            var logger = Instances.LoggingOperator.GetNullLogger();
+
+            var humanOutput = Instances.HumanOutputOperator.Get_New_Null();
+
+            var output = new TextOutput
+            {
+                HumanOutput = humanOutput,
+                Logger = logger,
+            };
+
+            return output;
+        }
+
+        public ITextOutput Get_TextOutput(
+            string humanOutputTextFilePath,
+            string logCategoryName,
+            string logFilePath)
+        {
+            var humanOutput = Instances.HumanOutputOperator.GetCompositeHumanOutput_ConsoleAndFile(
+                humanOutputTextFilePath);
+
+            var logger = Instances.LoggingOperator.Get_Logger(
+                logCategoryName,
+                logFilePath);
+
+            var textOutput = new TextOutput
+            {
+                HumanOutput = humanOutput,
+                Logger = logger,
+            };
+
+            Internal.WriteLogFilePath(textOutput, logFilePath);
+
+            return textOutput;
+        }
+
         public void InTextOutputContext_Synchronous(
             string humanOutputTextFilePath,
             string logCategoryName,
