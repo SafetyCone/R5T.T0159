@@ -29,5 +29,11 @@ namespace R5T.T0159
 
             return textOutput;
         }
+
+        public TextOutput FromNullLogger()
+        {
+            return this.FromLogger(
+                Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
+        }
     }
 }
