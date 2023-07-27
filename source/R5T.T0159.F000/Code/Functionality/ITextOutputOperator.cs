@@ -27,6 +27,21 @@ namespace R5T.T0159.F000
             return output;
         }
 
+        public ITextOutput Get_Console()
+        {
+            var humanOutput = Instances.HumanOutputOperator.Get_Console();
+
+            var logger = Instances.LoggingOperator.GetNullLogger();
+
+            var output = new TextOutput
+            {
+                HumanOutput = humanOutput,
+                Logger = logger,
+            };
+
+            return output;
+        }
+
         public ITextOutput Get_TextOutput(
             string humanOutputTextFilePath,
             string logCategoryName,

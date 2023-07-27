@@ -12,6 +12,13 @@ namespace R5T.T0159
     [UtilityTypeMarker]
     public class TextOutput : ITextOutput
     {
+        #region Static
+
+        public static TextOutput Null => Instances.TextOutputOperator.FromNullLogger();
+
+        #endregion
+
+
         public IHumanOutput HumanOutput { get; set; }
         public ILogger Logger { get; set; }
     }
