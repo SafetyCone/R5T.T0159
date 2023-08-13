@@ -9,14 +9,15 @@ namespace R5T.T0159.F000
     [FunctionalityMarker]
     public partial interface ITextOutputOperator : IFunctionalityMarker
     {
+        private static T0159.ITextOutputOperator Base => T0159.TextOutputOperator.Instance;
         private static Internal.ITextOutputOperator Internal => F000.Internal.TextOutputOperator.Instance;
+        
 
-
-        public ITextOutput Get_New_Null()
+        public ITextOutput Get_Console()
         {
-            var logger = Instances.LoggingOperator.GetNullLogger();
+            var humanOutput = Instances.HumanOutputOperator.Get_Console();
 
-            var humanOutput = Instances.HumanOutputOperator.Get_New_Null();
+            var logger = Instances.LoggingOperator.Get_NullLogger();
 
             var output = new TextOutput
             {
@@ -27,19 +28,20 @@ namespace R5T.T0159.F000
             return output;
         }
 
-        public ITextOutput Get_Console()
+        /// <inheritdoc cref="T0159.ITextOutputOperator.Get_New_Null"/>
+        public ITextOutput Get_New_Null()
         {
-            var humanOutput = Instances.HumanOutputOperator.Get_Console();
+            return Base.Get_New_Null();
+        }
 
-            var logger = Instances.LoggingOperator.GetNullLogger();
+        public void In_TextOutputContext_Console(
+            Action<ITextOutput> textOutputAction)
+        {
+            var consoleTextOutput = this.Get_Console();
 
-            var output = new TextOutput
-            {
-                HumanOutput = humanOutput,
-                Logger = logger,
-            };
-
-            return output;
+            Instances.ActionOperator.Run(
+                textOutputAction,
+                consoleTextOutput);
         }
 
         public ITextOutput Get_TextOutput(
