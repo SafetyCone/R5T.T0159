@@ -40,8 +40,8 @@ namespace R5T.T0159.F000
             var consoleTextOutput = this.Get_Console();
 
             Instances.ActionOperator.Run(
-                textOutputAction,
-                consoleTextOutput);
+                consoleTextOutput,
+                textOutputAction);
         }
 
         public ITextOutput Get_TextOutput(
